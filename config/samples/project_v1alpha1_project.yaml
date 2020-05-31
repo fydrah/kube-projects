@@ -1,0 +1,22 @@
+apiVersion: project.fydrah.com/v1alpha1
+kind: Project
+metadata:
+  name: project-sample
+spec:
+  # Add fields here
+  limitRange:
+    limits:
+      - default:
+          cpu: 100m
+          memory: 256Mi
+        defaultRequest:
+          cpu: 10m
+          memory: 128Mi
+        type: Container
+
+  resourceQuota:
+    hard:
+      requests.cpu: "1"
+      requests.memory: 1Gi
+      limits.cpu: "2"
+      limits.memory: 2Gi

@@ -1,0 +1,7 @@
+domain: fydrah.com
+repo: github.com/fydrah/kube-projects
+resources:
+- group: project
+  kind: Project
+  version: v1alpha1
+version: "2"

@@ -15,6 +15,8 @@ spec:
     plural: projects
     singular: project
   scope: Cluster
+  subresources:
+    status: {}
   validation:
     openAPIV3Schema:
       description: Project is the Schema for the projects API
@@ -35,12 +37,10 @@ spec:
           description: ProjectSpec defines the desired state of Project
           properties:
             limitRange:
-              description: LimitRange is the Kubernetes limit range specs to associate
+              description: LimitRange is the Kubernetes limit range specs associated
                 to the project
               properties:
                 limits:
-                  description: Limits is the list of LimitRangeItem objects that are
-                    enforced.
                   items:
                     description: LimitRangeItem defines a min/max usage limit for
                       any resource that matches on kind.
@@ -103,12 +103,10 @@ spec:
                         type: string
                     type: object
                   type: array
-              required:
-              - limits
               type: object
             resourceQuota:
-              description: ResourceQuota is the Kubernetes resource quota specs to
-                associate to the project
+              description: ResourceQuota is the Kubernetes resource quota specs associated
+                to the project
               properties:
                 hard:
                   additionalProperties:

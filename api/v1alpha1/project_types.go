@@ -24,14 +24,20 @@ import (
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
 
+// LimitRangeSpec override corev1 LimitRangeSpec to add omitempty
+// json tag (required in this case since limits are not required)
+type LimitRangeSpec struct {
+	Limits []v1.LimitRangeItem `json:"limits,omitempty" protobuf:"bytes,1,rep,name=limits"`
+}
+
 // ProjectSpec defines the desired state of Project
 type ProjectSpec struct {
 	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
 
-	// LimitRange is the Kubernetes limit range specs to associate to the project
-	LimitRange v1.LimitRangeSpec `json:"limitRange,omitempty"`
-	// ResourceQuota is the Kubernetes resource quota specs to associate to the project
+	// LimitRange is the Kubernetes limit range specs associated to the project
+	LimitRange LimitRangeSpec `json:"limitRange,omitempty"`
+	// ResourceQuota is the Kubernetes resource quota specs associated to the project
 	ResourceQuota v1.ResourceQuotaSpec `json:"resourceQuota,omitempty"`
 }
 
@@ -48,6 +54,7 @@ type ProjectStatus struct {
 
 // +kubebuilder:object:root=true
 // +kubebuilder:resource:scope=Cluster
+// +kubebuilder:subresource:status
 
 // Project is the Schema for the projects API
 type Project struct {
